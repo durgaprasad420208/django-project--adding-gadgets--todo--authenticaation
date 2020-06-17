@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Todo-Home</title>
+{% endblock title %}
+
+{% block content %}
+<a class="btn btn-outline-dark btn-lg btn-block" href="{% url 'todo-create' %}">ADD TASK</a>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Task</th>
+      <th scope="col">Status</th>
+      <th scope="col">Edit / Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for task in task %}
+  {% if task.done %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td><a href="{% url 'todo-view' task.pk %}">{{task.name}}</a></td>
+      <td>Completed</td>
+      <td><a href="{% url 'todo-edit' task.pk %}">Edit</a> / <a href="{% url 'todo-delete' task.pk %}">Delete</a></td>
+    </tr>
+    {% else %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td><a href="{% url 'todo-view' task.pk %}">{{task.name}}</a></td>
+      <td>Not Completed</td>
+      <td><a href="{% url 'todo-edit' task.pk %}">Edit</a> / <a href="{% url 'todo-delete' task.pk %}">Delete</a></td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Gadget-List</title>
+{% endblock title %}
+
+{% block content %}
+
+<h1 class="text-center">{{title}}</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">S.No</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Model</th>
+      <th scope="col">RAM</th>
+      <th scope="col">ROM</th>
+      <th scope="col">Processor</th>
+      <th scope="col">Delete</th>
+
+    </tr>
+  </thead>
+{% for gadget in gadgets %}
+    <tbody>
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td><a href="{% url 'edit' gadget.pk %}">{{gadget.brand}}</a></td>
+      <td>{{gadget.model}}</td>
+      <td>{{gadget.ram}}</td>
+      <td>{{gadget.rom}}</td>
+      <td>{{gadget.processor}}</td>
+      <td><a href="{% url 'delete' gadget.pk %}">Delete</a></td>
+    </tr>
+
+  </tbody>
+
+
+{% endfor %}
+
+</table>
+{% endblock content %}
